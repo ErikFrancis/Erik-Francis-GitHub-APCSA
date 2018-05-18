@@ -17,6 +17,7 @@ public class Breakout extends Canvas implements KeyListener, Runnable{
 	private ArrayList<Block> blocks = new ArrayList<Block>();
 	private ArrayList<Color> colors = new ArrayList<Color>();
 	private int level=1;
+	private int winat = 3;
 	
 	public Breakout(){
 		//set up all variables related to the game
@@ -53,7 +54,9 @@ public class Breakout extends Canvas implements KeyListener, Runnable{
 			   level++;
 			   ball.setXSpeed(ball.getXSpeed()+1);
 			   ball.setYSpeed(ball.getYSpeed()+1);
-			   createBlocks(level);
+			   if(level!=winat) {
+				   createBlocks(level);
+			   }
 		   }
 			//set up the double buffering to make the game animation nice and smooth
 			Graphics2D twoDGraph = (Graphics2D)window;
@@ -79,7 +82,8 @@ public class Breakout extends Canvas implements KeyListener, Runnable{
 			bottomWall.draw(graphToBack);
 			rightWall.draw(graphToBack);
 			leftWall.draw(graphToBack);
-			if(level==3 || level==-1) {
+			
+			if(level==winat || level==-1) {
 				graphToBack.drawString("YOU WIN!", 250, 250);
 				level=-1;
 			}
